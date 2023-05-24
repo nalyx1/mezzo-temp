@@ -1,0 +1,62 @@
+version: '3'
+services:
+  cache:
+    container_name: cache
+    image: redis:6
+    networks:
+      - directus
+  directus:
+    image: directus/directus:latest
+    ports:
+      - 8055:8055
+    volumes:
+      - ./uploads:/directus/uploads
+      - ./extensions:/directus/extensions
+    networks:
+      - directus
+    depends_on:
+      - cache
+    environment:
+      KEY: '35dd2550-092b-4cec-9075-5c35f3eeaf88'
+      SECRET: '1ed092ae-59b1-4f28-b053-3c8ca3217457'
+      APP_TOKEN: 'b1jdMRdmXalCJ2-rYcH7cOuVsAQeSnZQ'
+
+      MANAGER_ROLE: '737cb10e-c12a-4657-895e-fe385852e1b5'
+      ADMIN_ROLE: '915297b5-320d-4828-9a5e-fe348c61347b'
+
+      DB_CLIENT: 'mysql'
+      DB_HOST: 'abare.cloud'
+      DB_PORT: '3306'
+      DB_DATABASE: 'mezzo'
+      DB_USER: 'mezzo'
+      DB_PASSWORD: 'mX72%949FImz'
+
+      CACHE_ENABLED: 'true'
+      CACHE_STORE: 'redis'
+      CACHE_REDIS: 'redis://cache:6379'
+
+      ADMIN_EMAIL: 'joaopaulo@abaremarketing.com'
+      ADMIN_PASSWORD: 'abare102030'
+
+      ACCESS_TOKEN_TTL: '15m'
+      REFRESH_TOKEN_TTL: '7d'
+      REFRESH_TOKEN_COOKIE_SECURE: 'false'
+      REFRESH_TOKEN_COOKIE_SAME_SITE: 'lax'
+      REFRESH_TOKEN_COOKIE_NAME: 'directus_refresh_token'
+
+      EMAIL_FROM: 'no-reply@abare.cloud'
+      EMAIL_TRANSPORT: 'smtp'
+      EMAIL_SMTP_HOST: 'email-smtp.us-east-1.amazonaws.com'
+      EMAIL_SMTP_PORT: '587'
+      EMAIL_SMTP_USER: 'AKIAY5O3BKYYFY34JTFV'
+      EMAIL_SMTP_PASSWORD: 'BJGN8mFxiHKPRfUY8KtenUcpUf+GlrPRdySuAWBbH/L5'
+      EMAIL_SMTP_SECURE: 'false'
+      EMAIL_SMTP_POOL: 'false'
+      EMAIL_SMTP_IGNORE_TLS: 'false'
+      EMAIL_SMTP_TLS_CIPHERS: 'SSLv3'
+
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: 'true'
+
+networks:
+  directus:

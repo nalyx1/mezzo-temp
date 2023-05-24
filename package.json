@@ -1,0 +1,12 @@
+{
+  "name": "mezzo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docker:up": "docker-compose up -d",
+    "docker:update": "docker-compose pull"
+  },
+  "author": "",
+  "license": "ISC"
+}
